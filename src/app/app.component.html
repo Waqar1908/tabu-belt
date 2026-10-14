@@ -1,0 +1,59 @@
+<div class="backdrop" aria-hidden="true"></div>
+<div class="loader" [class.is-done]="ready()" aria-hidden="true"><span>ORREN</span></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="mast">
+  <span class="mast__logo">ORREN</span>
+  <span class="mast__tag">Maison de Ceinture</span>
+</header>
+<div class="rail" aria-hidden="true"><i data-progress></i></div>
+
+<main class="scroll-root" #root>
+  <section class="hero" data-hero>
+    <div class="hero__pin" data-hero-copy>
+      <p class="eyebrow" data-intro>The Signature Belt</p>
+      <h1 class="hero__title" aria-label="Built to define">
+        <span class="mask"><span data-line>BUILT TO</span></span>
+        <span class="mask"><span data-line>DEFINE</span></span>
+      </h1>
+      <div class="cue" data-intro><span>Scroll</span><i></i></div>
+    </div>
+  </section>
+
+  @for (c of chapters; track c.index) {
+    <section class="chapter" data-chapter [attr.data-side]="c.side" [style.--h]="c.height + 'vh'">
+      <div class="chapter__pin">
+        <div class="chapter__copy">
+          <p class="eyebrow" data-reveal>{{ c.index }} — {{ c.label }}</p>
+          <h2 class="chapter__title" data-reveal>{{ c.title }}</h2>
+          <p class="chapter__body" data-reveal>{{ c.body }}</p>
+          <dl class="specs">
+            @for (s of c.specs; track s.k) {
+              <div data-reveal><dt>{{ s.k }}</dt><dd>{{ s.v }}</dd></div>
+            }
+          </dl>
+        </div>
+      </div>
+    </section>
+  }
+
+  <section class="chapter chapter--finale" data-chapter data-last style="--h: 130vh">
+    <div class="chapter__pin">
+      <h2 class="finale__title" data-reveal>TIMELESS<br>BY DESIGN</h2>
+      <div class="finale__cta" data-reveal >
+        <button class="cta" type="button" (click)="openWhatsApp()">
+          <span>Discover the Collection</span>
+          <svg viewBox="0 0 24 8" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+            <path d="M0 4h22M19 1l3 3-3 3" />
+          </svg>
+        </button>
+        <p class="fine">Made to order in Firenze</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+@defer (on immediate) {
+  <app-belt-stage [scrollRoot]="root" (ready)="ready.set(true)" />
+}

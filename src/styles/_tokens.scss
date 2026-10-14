@@ -1,0 +1,19 @@
+$ink: #050403;
+$char: #12100e;
+$leather: #7a4a2b;
+$gold: #c9a45c;
+$bone: #efe7da;
+$muted: rgba($bone, 0.66);
+
+$serif: 'Cormorant Garamond', 'Didot', 'Bodoni 72', Georgia, serif;
+$sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+$bp-md: 48em;
+$bp-lg: 75em;
+$ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+@mixin up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
